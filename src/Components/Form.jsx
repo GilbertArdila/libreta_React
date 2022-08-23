@@ -51,7 +51,7 @@ const Form = () => {
         type='text'
         className='border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400'
         />
-
+         
         <input
          type='submit'
          className='bg-blue-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-blue-800 transition-colors cursor-pointer ' 
