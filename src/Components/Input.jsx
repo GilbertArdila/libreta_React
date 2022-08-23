@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Input = ({inputName,inputText,inputType,inputPlaceholder}) => {
+const Input = ({inputName,inputText,inputType,inputPlaceholder,}) => {
   return (
     <React.Fragment>
         <label htmlFor={inputName} 
