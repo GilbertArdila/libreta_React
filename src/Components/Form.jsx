@@ -3,7 +3,9 @@ import {Input} from'../Components/Input'
 import {regex_name,regex_apellido,regex_mail,regex_phone} from './Regex'
 import { Validaciones } from './Validaciones';
 import { nameHandleBlur,apellidoHandleBlur,mailHandleBlur,phoneHandleBlur} from '../EventListener/OnBlur';
-const Form = ({tareas,setTareas}) => {
+
+const Form = ({contactos,setcontactos}) => {
+
   //creamos los estados para los input y las validacones
   const [nombre,setNombre]=React.useState('');
   const [apellido,setApellido]=React.useState('');
@@ -16,6 +18,7 @@ const Form = ({tareas,setTareas}) => {
    const[regexApellido,setRegexApellido]=React.useState(false);
    const[regexMail,setRegexMail]=React.useState(false);
    const[regexTelefono,setRegexTelefono]=React.useState(false);
+   
   //creanso función para el submit del formulario
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -38,7 +41,7 @@ const Form = ({tareas,setTareas}) => {
         descripcion
       };
 
-      setTareas([...tareas, objetoContacto])
+      setcontactos([...contactos, objetoContacto])
       e.target.reset()
       setDescripcion('')
     }
