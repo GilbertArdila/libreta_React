@@ -12,12 +12,13 @@ const Contactos = ({tareas}) => {
           <div className='bg-white shadow-md px-5 py-5 rounded-lg md:h-screen overflow-scroll'>
           <Parrafo
             text={`Nombre:${' '}`}
-            textComplement={tareas[0].nombre}
+            textComplement={tareas[0].nombre.toUpperCase()}
+            
           />
       
           <Parrafo
             text={`Apellido:${' '}`}
-            textComplement={tareas[0].apellido}
+            textComplement={tareas[0].apellido.toUpperCase()}
           />
       
           <Parrafo
@@ -37,7 +38,7 @@ const Contactos = ({tareas}) => {
       
           <Parrafo
              text={`Descripción:${' '}`}
-             textComplement={tareas[0].descripcion}
+             textComplement={tareas[0].descripcion.toUpperCase()}
           />
         </div> 
     

@@ -60,7 +60,7 @@ const Form = ({tareas,setTareas}) => {
       onSubmit={handleSubmit}>
 
        {error && 
-        <div className='bg-red-600 font-bold uppercase w-2 text-center text-white p-3 mb-5 rounded-md w-full text-center ' >
+        <div className='bg-red-600 font-bold uppercase   text-white p-3 mb-5 rounded-md w-full text-center ' >
           <p >No puede haber campos vacios</p>
           </div>}
         
