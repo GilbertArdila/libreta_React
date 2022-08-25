@@ -1,10 +1,10 @@
 import React from 'react'
 import {Input} from'../Components/Input'
-import {regex_name,regex_email,regex_phone} from './Regex'
+import {regex_name,regex_apellido,regex_mail,regex_phone} from './Regex'
 import { Validaciones } from './Validaciones';
-
+import { nameHandleBlur,apellidoHandleBlur,mailHandleBlur,phoneHandleBlur} from '../EventListener/OnBlur';
 const Form = ({tareas,setTareas}) => {
-  //creamos los estados para los input
+  //creamos los estados para los input y las validacones
   const [nombre,setNombre]=React.useState('');
   const [apellido,setApellido]=React.useState('');
   const [mail,setMail]=React.useState('');
@@ -12,8 +12,10 @@ const Form = ({tareas,setTareas}) => {
   const [cumpleanios,setCumpleanios]=React.useState('');
   const [descripcion,setDescripcion]=React.useState('');
   const [error,setError]=React.useState(false);
- 
-
+   const[regexName,setRegexName]=React.useState(false);
+   const[regexApellido,setRegexApellido]=React.useState(false);
+   const[regexMail,setRegexMail]=React.useState(false);
+   const[regexTelefono,setRegexTelefono]=React.useState(false);
   //creanso función para el submit del formulario
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -37,12 +39,16 @@ const Form = ({tareas,setTareas}) => {
       };
 
       setTareas([...tareas, objetoContacto])
+      e.target.reset()
+      setDescripcion('')
     }
      
-
+    
      
 
   }
+
+  
 
   return (
     <div className='md:w-1/2 lg:w-2/5 mx-5'>
@@ -54,8 +60,8 @@ const Form = ({tareas,setTareas}) => {
       onSubmit={handleSubmit}>
 
        {error && 
-        <div className='bg-red-600 font-bold uppercase w-2 text-center text-white p-3 mb-5 rounded-md'>
-          <p>No puede haber campos vacios</p>
+        <div className='bg-red-600 font-bold uppercase w-2 text-center text-white p-3 mb-5 rounded-md w-full text-center ' >
+          <p >No puede haber campos vacios</p>
           </div>}
         
         <Input
@@ -64,12 +70,14 @@ const Form = ({tareas,setTareas}) => {
           inputType={'text'}
           inputPlaceholder={'Nombre aquí...'}
           value={nombre}
+          onBlur={()=>nameHandleBlur({regex_name,nombre,setRegexName})}
           onChange={(e)=>setNombre(e.target.value)}
-          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400 ${regex_name.test(nombre)===false && 'border-red-400' }`}
+          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400 `}
         />
-          {!regex_name.test(nombre)&& <Validaciones
+          {regexName && <Validaciones
            nombreCampo={'nombre'}
            texto={'el nombre debe contener al menos 3 letras y puede o no tener segundo nombre'}
+           className={'border-red-400 border-2 p-1'}
           />}
           
         <Input
@@ -79,13 +87,15 @@ const Form = ({tareas,setTareas}) => {
           inputPlaceholder={'Apellido aquí...'}
           value={apellido}
           onChange={(e)=>setApellido(e.target.value)}
-          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400 ${regex_name.test(apellido)===false && 'border-red-400' }`}
+          onBlur={()=>apellidoHandleBlur({regex_apellido,apellido,setRegexApellido})}
+          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400`}
           
         />
-        {!regex_name.test(apellido)&& <Validaciones
-          nombreCampo={'apellido'}
-          texto={'el apellido debe contener al menos 3 letras y puede o no tener segundo apellido'}
-         /> }
+        {regexApellido && <Validaciones
+           nombreCampo={'apellido'}
+           texto={'el apellido debe contener al menos 3 letras y puede o no tener segundo apellido'}
+           className={'border-red-400 border-2 p-1'}
+          />}
 
         <Input
           inputName={'email'}
@@ -94,13 +104,15 @@ const Form = ({tareas,setTareas}) => {
           inputPlaceholder={'E-mail aquí...'}
           value={mail}
           onChange={(e)=>setMail(e.target.value)}
-          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400 ${regex_email.test(mail)===false && 'border-red-400'}`}
+          onBlur={()=>mailHandleBlur({regex_mail,mail,setRegexMail})}
+          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400 `}
           
         />
-        {!regex_email.test(mail) && <Validaciones
-          nombreCampo={'mail'}
-          texto={'dirección de correo invalida '}
-         />}
+        {regexMail && <Validaciones
+           nombreCampo={'mail'}
+           texto={'Formato invalido,por favor revisa el correo electronico'}
+           className={'border-red-400 border-2 p-1'}
+          />}
 
         <Input
           inputName={'telefono'}
@@ -109,13 +121,17 @@ const Form = ({tareas,setTareas}) => {
           inputPlaceholder={'Telefono aquí...'}
           value={telefono}
           onChange={(e)=>setTelefono(e.target.value)}
-          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400 ${regex_phone.test(telefono)===false && 'border-red-400' }`}
+          onBlur={()=>phoneHandleBlur({regex_phone,telefono,setRegexTelefono})}
+
+          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400`}
           
         />
-       {!regex_phone.test(telefono)&& <Validaciones
-          nombreCampo={'telefono'}
-          texto={'el número teléfonico debe contener 10 digitos, si es un número local debes ingresar el prefijo 60 + el indicativo de la ciudad por ejemplo 601 para Bogotá'}
-         />}
+         {regexTelefono && <Validaciones
+           nombreCampo={'telefono'}
+           texto={'el número teléfonico debe contener 10 digitos sin espacios ni guiones, si es un número local debes ingresar el prefijo 60 + el indicativo de la ciudad por ejemplo 601 para Bogotá'}
+           className={'border-red-400 border-2 p-1'}
+          />}
+     
         <Input
           inputName={'cumpleaños'}
           inputText={'Cumpleaños'}

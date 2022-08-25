@@ -8,14 +8,21 @@ function App() {
  const [tareas, setTareas] = React.useState([])
 
   return (
-    <div className='container mx-auto mt-20'>
+    <div className='container mx-auto mt-20 '>
       <Header></Header>
       <div className='mt-12 md:flex'>
         <Form
         tareas={tareas}
         setTareas={setTareas}
         />
-      <Lista></Lista>
+        
+      <Lista
+      tareas={tareas}
+      />
+        
+      
+        
+     
       </div>
       
     </div>
