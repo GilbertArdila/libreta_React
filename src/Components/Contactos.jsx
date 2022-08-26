@@ -1,103 +1,38 @@
 import React from 'react'
-import { Parrafo } from './Parrafo'
-const Contactos = ({contactos}) => {
- 
- 
+import {Parrafo} from'../Components/Parrafo'
 
+const Contactos = ({contacto}) => {
+ const{nombre,apellido,mail,telefono,cumpleanios,descripcion}=contacto
   return (
-    <>
-    {contactos.length>0 &&
-         
+    <div className='bg-white shadow-md px-5 py-5 rounded-lg  mt-5' >
+         <Parrafo>
+        <p className='font-bold mb-3 text-gray-700 uppercase'>{`Nombre:${' '}`}<span className='font-normal normal-case'>{nombre.toUpperCase()}</span></p>
+        </Parrafo>
 
-          <div className='bg-white shadow-md px-5 py-5 rounded-lg md:h-screen overflow-scroll'>
-          <Parrafo
-            text={`Nombre:${' '}`}
-            textComplement={contactos[0].nombre.toUpperCase()}
-            
-          />
-      
-          <Parrafo
-            text={`Apellido:${' '}`}
-            textComplement={contactos[0].apellido.toUpperCase()}
-          />
-      
-          <Parrafo
-            text={`Mail:${' '}`}
-            textComplement={contactos[0].mail}
-          />
-      
-          <Parrafo
-            text={`Telefono:${' '}`}
-            textComplement={contactos[0].telefono}
-          />
-      
-          <Parrafo
-            text={`Cumpleaños:${' '}`}
-            textComplement={contactos[0].cumpleanios}
-          />
-      
-          <Parrafo
-             text={`Descripción:${' '}`}
-             textComplement={contactos[0].descripcion.toUpperCase()}
-          />
-        </div> 
-    
+       <Parrafo>
+       <p className='font-bold mb-3 text-gray-700 uppercase'>{`Apellido:${' '}`}<span className='font-normal normal-case'>{apellido.toUpperCase()}</span></p>
+       </Parrafo>
    
-      
-      
-      
-    
-    }
-    {!contactos.length &&
-         
+       <Parrafo>
+       <p className='font-bold mb-3 text-gray-700 uppercase'>{`Mail:${' '}`}<span className='font-normal normal-case'>{mail}</span></p>
+       </Parrafo>
 
-         <div className='bg-white shadow-md px-5 py-5 rounded-lg md:h-screen overflow-scroll'>
-         <Parrafo
-           text={`Nombre:${' '}`}
-           textComplement={''}
-         />
-     
-         <Parrafo
-           text={`Apellido:${' '}`}
-           textComplement={''}
-         />
-     
-         <Parrafo
-           text={`Mail:${' '}`}
-           textComplement={''}
-         />
-     
-         <Parrafo
-           text={`Telefono:${' '}`}
-           textComplement={''}
-         />
-     
-         <Parrafo
-           text={`Cumpleaños:${' '}`}
-           textComplement={''}
-         />
-     
-         <Parrafo
-            text={`Descripción:${' '}`}
-            textComplement={''}
-         />
-       </div> 
+       <Parrafo>
+       <p className='font-bold mb-3 text-gray-700 uppercase'>{`Telefono:${' '}`}<span className='font-normal normal-case'>{telefono.toUpperCase()}</span></p>
+       </Parrafo>
    
-  
-     
-     
-     
-   
-   }
-    
-    
-       
-    
-    
-    </>
-
-    
+       <Parrafo>
+       <p className='font-bold mb-3 text-gray-700 uppercase'>{`Cumpleaños:${' '}`}<span className='font-normal normal-case'>{cumpleanios}</span></p>
+       </Parrafo>
+      
+       <Parrafo>
+       <p className='font-bold mb-3 text-gray-700 uppercase'>{`Descripción:${' '}`}<span className='font-normal normal-case'>{descripcion.toUpperCase()}</span></p>
+       </Parrafo>
+       </div>  
   )
+ 
+
+  
 }
 
 export {Contactos}

@@ -3,6 +3,7 @@ import {Input} from'../Components/Input'
 import {regex_name,regex_apellido,regex_mail,regex_phone} from './Regex'
 import { Validaciones } from './Validaciones';
 import { nameHandleBlur,apellidoHandleBlur,mailHandleBlur,phoneHandleBlur} from '../EventListener/OnBlur';
+import { AlertError } from './AlertError';
 
 const Form = ({contactos,setcontactos}) => {
 
@@ -19,6 +20,12 @@ const Form = ({contactos,setcontactos}) => {
    const[regexMail,setRegexMail]=React.useState(false);
    const[regexTelefono,setRegexTelefono]=React.useState(false);
    
+
+   //generador de id
+   const generarId=()=>{
+    const id=Math.random().toString(20).substring(2)
+    return id
+   }
   //creanso función para el submit del formulario
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -38,17 +45,14 @@ const Form = ({contactos,setcontactos}) => {
         mail,
         telefono,
         cumpleanios,
-        descripcion
+        descripcion,
+        id:generarId()
       };
 
       setcontactos([...contactos, objetoContacto])
       e.target.reset()
       setDescripcion('')
     }
-     
-    
-     
-
   }
 
   
@@ -62,10 +66,9 @@ const Form = ({contactos,setcontactos}) => {
       <form className='bg-white shadow-md rounded-md py-10 px-5'
       onSubmit={handleSubmit}>
 
-       {error && 
-        <div className='bg-red-600 font-bold uppercase   text-white p-3 mb-5 rounded-md w-full text-center ' >
-          <p >No puede haber campos vacios</p>
-          </div>}
+       {error && <AlertError><p >No puede haber campos vacíos</p></AlertError>
+        
+          }
         
         <Input
           inputName={'nombre'}
