@@ -6,7 +6,7 @@ import React from 'react'
 
 function App() {
  const [contactos, setcontactos] = React.useState([])
-
+  const [contacto, setContacto] = React.useState({})
   return (
     <div className='container mx-auto mt-20 '>
       <Header></Header>
@@ -19,6 +19,7 @@ function App() {
         
       <Lista
       contactos={contactos}
+      setContacto={setContacto}
       />
         
       
