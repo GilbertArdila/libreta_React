@@ -7,9 +7,17 @@ import React from 'react'
 function App() {
   //para poder guardar la lista de contacto
  const [contactos, setcontactos] = React.useState([])
- //este arreglo de contacto es para poder usar el actualizar
   const [contacto, setContacto] = React.useState({})
+  
+  //función para eliminar el contacto
+ const eliminarContacto=(id)=>{
+  //este filter va a buscar el id en el arreglo de contactos y va a copiar los demás id, no ese
+  const borrarContacto=contactos.filter(contacto=>contacto.id !== id)
  
+  //pasamos el nuevo arreglo al arreglo con los contactos
+  setcontactos(borrarContacto)
+  
+ }
  
 //************************* */
 
@@ -32,6 +40,7 @@ function App() {
       <Lista
       contactos={contactos}
       setContacto={setContacto}
+      eliminarContacto={eliminarContacto}
       
      
       />

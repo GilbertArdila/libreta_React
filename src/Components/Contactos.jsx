@@ -3,12 +3,15 @@ import {Parrafo} from'../ComponentsOfComponents/Parrafo'
 import { Button } from '../ComponentsOfComponents/Button'
 
 const Contactos = ({contacto,
-  setContacto,
+  setContacto,eliminarContacto
   
  }) => {
  const{nombre,apellido,mail,telefono,cumpleanios,descripcion,id}=contacto
 
- 
+ const handleEliminar=(id)=>{
+  const confirmacion=confirm('Eliminar contacto ¿seguro? 😱');
+  confirmacion?eliminarContacto(id):null;
+ }
  
   return (
     <div className='bg-white shadow-md px-5 py-5 rounded-lg  mt-5' >
@@ -44,7 +47,7 @@ const Contactos = ({contacto,
          />
 
          <Button className='bg-red-500 font-semibold text-white mr-1.5 border-2 border-solid rounded-md p-2 w-24 hover:bg-red-700' type='button'
-         onClick={()=>console.log(id)}
+         onClick={()=>handleEliminar(id)}
          text={"Borrar"}/>
        </div>
        </div>  
