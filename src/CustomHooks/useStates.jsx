@@ -15,10 +15,7 @@ function useStates(){
   const [regexMail, setRegexMail] = React.useState(false);
   const [regexTelefono, setRegexTelefono] = React.useState(false);
 
-  //creamos los estados para los input y las validacones
-  //para poder guardar la lista de contacto
-  const [contactos, setcontactos] = React.useState([])
-  const [contacto, setContacto] = React.useState({})
+  
 
 
 
@@ -41,8 +38,7 @@ function useStates(){
       regexApellido,setRegexApellido,
       regexMail,setRegexMail,
       regexTelefono,setRegexTelefono,
-      contactos,setcontactos,
-      contacto,setContacto,
+     
      
     };
       
