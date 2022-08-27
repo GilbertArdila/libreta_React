@@ -1,7 +1,7 @@
 import React from 'react'
 import { Contactos } from './Contactos'
 
-const Lista = ({contactos,setContacto,uploading,setUploading}) => {
+const Lista = ({contactos,setContacto}) => {
 
  
    
@@ -18,8 +18,7 @@ const Lista = ({contactos,setContacto,uploading,setUploading}) => {
    contacto={contacto}
    key={contacto.id}
    setContacto={setContacto}
-   uploading={uploading}
-   setUploading={setUploading}
+   
    />
    
    )

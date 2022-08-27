@@ -4,8 +4,7 @@ import { Button } from '../ComponentsOfComponents/Button'
 
 const Contactos = ({contacto,
   setContacto,
-  uploading,
-  setUploading,
+  
  }) => {
  const{nombre,apellido,mail,telefono,cumpleanios,descripcion,id}=contacto
 
@@ -40,11 +39,7 @@ const Contactos = ({contacto,
        <div className='flex flex-row w-3/4 h-auto justify-between'>
         {/* {en el onClick estamos enviando los datos del contacto al arreglo contacto que creamos en el App.jsx} */}
         <Button className='bg-yellow-300 font-semibold text-white ml-1.5 border-2 border-solid rounded-md  p-2 w-24 hover:bg-yellow-500' type='button'
-        onClick={()=>{
-          setContacto(contacto)
-          setUploading(true)
-          
-        }}
+        onClick={()=>setContacto(contacto)}
          text={"Actualizar"}
          />
 

@@ -5,10 +5,11 @@ import React from 'react'
 
 
 function App() {
+  //para poder guardar la lista de contacto
  const [contactos, setcontactos] = React.useState([])
  //este arreglo de contacto es para poder usar el actualizar
   const [contacto, setContacto] = React.useState({})
-  const [uploading,setUploading]=React.useState(false);
+ 
  
 //************************* */
 
@@ -23,8 +24,7 @@ function App() {
         setcontactos={setcontactos}
         contacto={contacto}
         setContacto={setContacto}
-        uploading={uploading}
-        setUploading={setUploading}
+       
       
         
         />
@@ -32,8 +32,7 @@ function App() {
       <Lista
       contactos={contactos}
       setContacto={setContacto}
-      uploading={uploading}
-      setUploading={setUploading}
+      
      
       />
         
