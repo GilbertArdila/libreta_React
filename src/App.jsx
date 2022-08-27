@@ -14,7 +14,7 @@ function App() {
       
   }=useStates();
 
-  
+
   //función para eliminar el contacto
 const eliminarContacto = (id) => {
   //este filter va a buscar el id en el arreglo de contactos y va a copiar los demás id, no ese
@@ -36,8 +36,10 @@ const eliminarContacto = (id) => {
   
 
   return (
-    <div className='container mx-auto mt-20 '>
-      <Header></Header>
+    <div className='container mx-auto mt-4 '>
+      <Header
+      contactos={contactos}
+      />
       <div className='mt-12 md:flex'>
 
         <Form
