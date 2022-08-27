@@ -9,8 +9,11 @@ const Contactos = ({contacto,
  const{nombre,apellido,mail,telefono,cumpleanios,descripcion,id}=contacto
 
  const handleEliminar=(id)=>{
+    
   const confirmacion=confirm('Eliminar contacto ¿seguro? 😱');
   confirmacion?eliminarContacto(id):null;
+  
+  
  }
  
   return (

@@ -1,57 +1,60 @@
 import React from 'react'
 import { Input } from '../ComponentsOfComponents/Input'
-import { regex_name, regex_apellido, regex_mail, regex_phone } from '../Regex/Regex'
 import { Validaciones } from '../ComponentsOfComponents/Validaciones';
 import { nameHandleBlur, apellidoHandleBlur, mailHandleBlur, phoneHandleBlur } from '../EventListener/OnBlur';
 import { AlertError } from '../ComponentsOfComponents/AlertError';
-import { Button } from '../ComponentsOfComponents/Button';
+import { regex_name, regex_apellido, regex_mail, regex_phone } from '../Regex/Regex'
+import { useStates } from '../CustomHooks/useStates';
 
-const Form = ({ contactos,
+
+const Form = ({ 
+  contactos,
   setcontactos,
   contacto,
   setContacto,
-
-
+  
 }) => {
 
-  //creamos los estados para los input y las validacones
-  const [nombre, setNombre] = React.useState('');
-  const [apellido, setApellido] = React.useState('');
-  const [mail, setMail] = React.useState('');
-  const [telefono, setTelefono] = React.useState('');
-  const [cumpleanios, setCumpleanios] = React.useState('');
-  const [descripcion, setDescripcion] = React.useState('');
-  const [error, setError] = React.useState(false);
-  const [regexName, setRegexName] = React.useState(false);
-  const [regexApellido, setRegexApellido] = React.useState(false);
-  const [regexMail, setRegexMail] = React.useState(false);
-  const [regexTelefono, setRegexTelefono] = React.useState(false);
+  //importamos de CustonHooks States lo que vamos a usar
+  const { nombre, 
+    setNombre,
+    apellido, setApellido,
+    mail, setMail,
+    telefono, setTelefono,
+    cumpleanios, setCumpleanios,
+    descripcion, setDescripcion,
+    error, setError,
+    regexName, setRegexName,
+    regexApellido, setRegexApellido,
+    regexMail, setRegexMail,
+    regexTelefono, setRegexTelefono,
+   } = useStates();
+ 
   /************************************************************ */
 
-  // creando useEffect para escuchar el cambio en el arreglo contacto y usarlo para el handleUpdate
-  React.useEffect(() => {
+ /*funciones usadas para la generación y actualización de contactos* */
 
-    //cuando damos click a actualizar este nos manda los datos del contacto al arreglo contacto 
-    if (Object.keys(contacto).length > 0) {
+ // creando useEffect para escuchar el cambio en el arreglo contacto y usarlo para el handleUpdate
+ React.useEffect(() => {
 
-      setNombre(contacto.nombre)
-      setApellido(contacto.apellido)
-      setTelefono(contacto.telefono)
-      setCumpleanios(contacto.cumpleanios)
-      setDescripcion(contacto.descripcion)
-      setMail(contacto.mail)
+  //cuando damos click a actualizar este nos manda los datos del contacto al arreglo contacto 
+  if (Object.keys(contacto).length > 0) {
 
-    }
-  }, [contacto])
+    setNombre(contacto.nombre)
+    setApellido(contacto.apellido)
+    setTelefono(contacto.telefono)
+    setCumpleanios(contacto.cumpleanios)
+    setDescripcion(contacto.descripcion)
+    setMail(contacto.mail)
 
-
-
-  //generador de id para la key 
-  const generarId = () => {
-    const id = Math.random().toString(20).substring(2)
-    return id
   }
+}, [contacto])
 
+//generador de id para la key 
+const generarId = () => {
+  const id = Math.random().toString(20).substring(2)
+  return id
+}
 
   //creanso función para el submit del formulario
   const handleSubmit = (e) => {
@@ -92,6 +95,7 @@ const Form = ({ contactos,
         objetoContacto.id = generarId()
         //añadimos el contacto a el array de contactos
         setcontactos([...contactos, objetoContacto])
+        
       }
 
 
@@ -107,6 +111,8 @@ const Form = ({ contactos,
 
     }
   }
+
+  
 
 
   return (
