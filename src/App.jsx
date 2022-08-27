@@ -24,8 +24,17 @@ const eliminarContacto = (id) => {
   setcontactos(borrarContacto)
 
 }
-
+//obtenemos lo que está en el localStorage
+React.useEffect(() => {
+ const obtenerLocalStorage=()=>{
+  //si el localStorage está vacío nos envia un arreglo vacío
+     const contactosLocalStorage=JSON.parse(localStorage.get('contactos'))  ?? [];
+     setcontactos(contactosLocalStorage)
+ } 
+ obtenerLocalStorage()
   
+
+},[])
 
   //usando localStorage
   React.useEffect(() => {
