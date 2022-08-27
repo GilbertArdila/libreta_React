@@ -11,7 +11,6 @@ function App() {
   const [contactos, setcontactos] = React.useState([])
   const [contacto, setContacto] = React.useState({})
 
-
   
 //obtenemos lo que está en el localStorage
 React.useEffect(() => {
@@ -19,7 +18,7 @@ React.useEffect(() => {
   //si el localStorage está vacío nos envia un arreglo vacío
      const contactosLocalStorage=JSON.parse(localStorage.getItem('contactos'))  ?? [];
      setcontactos(contactosLocalStorage)
-     console.log(contactosLocalStorage)
+     
  } 
 
   
@@ -29,7 +28,7 @@ React.useEffect(() => {
   //usando localStorage
   React.useEffect(() => {
     localStorage.setItem('contactos', JSON.stringify(contactos))
-    console.log(contactos)
+   
   }, [contactos])
 
   //función para eliminar el contacto
@@ -50,7 +49,8 @@ const eliminarContacto = (id) => {
       <Header
       contactos={contactos}
       />
-      <div className='mt-12 md:flex'>
+     
+      <div className='mt-12 md:flex '>
 
         <Form
           contactos={contactos}
@@ -58,11 +58,12 @@ const eliminarContacto = (id) => {
           contacto={contacto}
           setContacto={setContacto}
         />
-
+        
         <Lista
           contactos={contactos}
           setContacto={setContacto}
           eliminarContacto={eliminarContacto}
+          
         />
       </div>
 

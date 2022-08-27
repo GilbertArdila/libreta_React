@@ -3,7 +3,7 @@ import {Parrafo} from'../ComponentsOfComponents/Parrafo'
 import { Button } from '../ComponentsOfComponents/Button'
 
 const Contactos = ({contacto,
-  setContacto,eliminarContacto
+  setContacto,eliminarContacto,
   
  }) => {
  const{nombre,apellido,mail,telefono,cumpleanios,descripcion,id}=contacto
@@ -17,6 +17,7 @@ const Contactos = ({contacto,
  }
  
   return (
+    
     <div className='bg-white shadow-md px-5 py-5 rounded-lg  mt-5' >
          <Parrafo>
         <p className='font-bold mb-3 text-gray-700 uppercase'>{`Nombre:${' '}`}<span className='font-normal normal-case'>{nombre.toUpperCase()}</span></p>

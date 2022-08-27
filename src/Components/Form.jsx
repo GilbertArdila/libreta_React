@@ -5,8 +5,6 @@ import { nameHandleBlur, apellidoHandleBlur, mailHandleBlur, phoneHandleBlur } f
 import { AlertError } from '../ComponentsOfComponents/AlertError';
 import { regex_name, regex_apellido, regex_mail, regex_phone } from '../Regex/Regex'
 import { useStates } from '../CustomHooks/useStates';
-
-
 const Form = ({ 
   contactos,
   setcontactos,

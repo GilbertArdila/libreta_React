@@ -19,6 +19,7 @@ const Lista = ({ contactos, setContacto, eliminarContacto }) => {
                 key={contacto.id}
                 setContacto={setContacto}
                 eliminarContacto={eliminarContacto}
+                
 
               />
 
