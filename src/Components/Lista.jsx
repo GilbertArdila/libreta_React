@@ -1,8 +1,10 @@
 import React from 'react'
 import { Contactos } from './Contactos'
 
-const Lista = ({contactos,setContacto}) => {
-  
+const Lista = ({contactos,setContacto,uploading,setUploading}) => {
+
+ 
+   
   
   return (
     <div className='md:w-1/2 lg:w-2/5 mx-5 mb-10 h-screen overflow-scroll'>
@@ -16,7 +18,10 @@ const Lista = ({contactos,setContacto}) => {
    contacto={contacto}
    key={contacto.id}
    setContacto={setContacto}
+   uploading={uploading}
+   setUploading={setUploading}
    />
+   
    )
 })}</>):<p className='font-bold text-4xl text-center tracking-wider'>No tienenes contactos aún</p>}
       

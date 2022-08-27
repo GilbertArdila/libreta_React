@@ -1,11 +1,19 @@
 import React from 'react'
-import {Input} from'../Components/Input'
-import {regex_name,regex_apellido,regex_mail,regex_phone} from './Regex'
-import { Validaciones } from './Validaciones';
+import {Input} from'../ComponentsOfComponents/Input'
+import {regex_name,regex_apellido,regex_mail,regex_phone} from '../Regex/Regex'
+import { Validaciones } from '../ComponentsOfComponents/Validaciones';
 import { nameHandleBlur,apellidoHandleBlur,mailHandleBlur,phoneHandleBlur} from '../EventListener/OnBlur';
-import { AlertError } from './AlertError';
+import { AlertError } from '../ComponentsOfComponents/AlertError';
+import { Button } from '../ComponentsOfComponents/Button';
 
-const Form = ({contactos,setcontactos}) => {
+const Form = ({contactos,
+  setcontactos,
+  contacto,
+  setContacto,
+  uploading,
+  setUploading,
+ 
+   }) => {
 
   //creamos los estados para los input y las validacones
   const [nombre,setNombre]=React.useState('');
@@ -19,13 +27,42 @@ const Form = ({contactos,setcontactos}) => {
    const[regexApellido,setRegexApellido]=React.useState(false);
    const[regexMail,setRegexMail]=React.useState(false);
    const[regexTelefono,setRegexTelefono]=React.useState(false);
+/************************************************************ */
+  const[clearForm,setClearForm]=React.useState({})
    
+// creando useEffect para escuchar el cambio en el arreglo contacto y usarlo para el handleUpdate
+React.useEffect(()=>{
+  
+  //cuando damos click a actualizar este nos manda los datos del contacto al arreglo contacto 
+  if(Object.keys(contacto).length>0  ){
+    
+    setNombre(contacto.nombre)
+    setApellido(contacto.apellido)
+    setTelefono(contacto.telefono)
+    setCumpleanios(contacto.cumpleanios)
+    setDescripcion(contacto.descripcion)
+    setMail(contacto.mail)
+    
+  }
+},[contacto])
 
-   //generador de id
+React.useEffect(()=>{
+  //reseteamos los campos
+  setNombre('')
+  setApellido('')
+  setTelefono('')
+  setCumpleanios('')
+  setDescripcion('')
+  setMail('')
+},[clearForm])
+
+   //generador de id para la key 
    const generarId=()=>{
     const id=Math.random().toString(20).substring(2)
     return id
    }
+
+
   //creanso función para el submit del formulario
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -48,11 +85,38 @@ const Form = ({contactos,setcontactos}) => {
         descripcion,
         id:generarId()
       };
-
+        //añadimos el contacto a el array de contactos
       setcontactos([...contactos, objetoContacto])
-      e.target.reset()
+      // //reseteamos los campos
+      setNombre('')
+      setApellido('')
+      setTelefono('')
+      setCumpleanios('')
       setDescripcion('')
+      setMail('')
+      
+     
+     
     }
+  }
+
+  const handleUpdate=()=>{
+      for(let i=0;i<contactos.length;i++){
+        if(contacto.id===contactos[i].id){
+          contactos[i].nombre=nombre
+          contactos[i].apellido=apellido
+          contactos[i].cumpleanios=cumpleanios
+          contactos[i].descripcion=descripcion
+          contactos[i].id=contacto.id
+          contactos[i].mail=mail
+          contactos[i].telefono=telefono
+          //cerramos el botón actualizar
+         setUploading(false)
+         //simplemente cambiamos el estado del clearForm para activar el useEffect de limpiar el campo
+         setClearForm(contacto)
+       
+        } 
+      }
   }
 
   
@@ -74,11 +138,11 @@ const Form = ({contactos,setcontactos}) => {
           inputName={'nombre'}
           inputText={'Nombre'}
           inputType={'text'}
-          inputPlaceholder={'Nombre aquí...'}
+          inputPlaceholder={'Leonidas'}
           value={nombre}
           onBlur={()=>nameHandleBlur({regex_name,nombre,setRegexName})}
           onChange={(e)=>setNombre(e.target.value)}
-          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400 `}
+          className={`border-2 w-full p-2 mt-2 rounded-md placeholder-grey-400  `}
         />
           {regexName && <Validaciones
            nombreCampo={'nombre'}
@@ -90,7 +154,7 @@ const Form = ({contactos,setcontactos}) => {
           inputName={'apellido'}
           inputText={'Apellido'}
           inputType={'text'}
-          inputPlaceholder={'Apellido aquí...'}
+          inputPlaceholder={'Lopez'}
           value={apellido}
           onChange={(e)=>setApellido(e.target.value)}
           onBlur={()=>apellidoHandleBlur({regex_apellido,apellido,setRegexApellido})}
@@ -107,7 +171,7 @@ const Form = ({contactos,setcontactos}) => {
           inputName={'email'}
           inputText={'E-mail'}
           inputType={'mail'}
-          inputPlaceholder={'E-mail aquí...'}
+          inputPlaceholder={'leolopez@gmail.com'}
           value={mail}
           onChange={(e)=>setMail(e.target.value)}
           onBlur={()=>mailHandleBlur({regex_mail,mail,setRegexMail})}
@@ -124,7 +188,7 @@ const Form = ({contactos,setcontactos}) => {
           inputName={'telefono'}
           inputText={'Telefono'}
           inputType={'number'}
-          inputPlaceholder={'Telefono aquí...'}
+          inputPlaceholder={'6043358861'}
           value={telefono}
           onChange={(e)=>setTelefono(e.target.value)}
           onBlur={()=>phoneHandleBlur({regex_phone,telefono,setRegexTelefono})}
@@ -158,11 +222,18 @@ const Form = ({contactos,setcontactos}) => {
         
         />
          
-        <input
+       {!uploading && <input
          type='submit'
          className='bg-blue-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-blue-800 transition-colors cursor-pointer ' 
          value={'Crear Contacto'}
-        />
+        />}
+        
+        {uploading && <Button
+         text={'Actualizar'}
+         className='bg-green-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-green-800 transition-colors cursor-pointer'
+         type={'button'}
+         onClick={handleUpdate}
+        />}
       </form>
     </div>
   )

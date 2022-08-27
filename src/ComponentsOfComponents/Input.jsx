@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Input = ({inputName,inputText,inputType,inputPlaceholder,onChange,className,onBlur}) => {
+const Input = ({inputName,inputText,inputType,inputPlaceholder,onChange,className,onBlur,value}) => {
   return (
     <React.Fragment>
         <label htmlFor={inputName} 
@@ -8,6 +8,7 @@ const Input = ({inputName,inputText,inputType,inputPlaceholder,onChange,classNam
         <input
          type={inputType}
          placeholder={inputPlaceholder}
+         value={value}
          id={inputName}
          onChange={onChange}
          onBlur={onBlur}
